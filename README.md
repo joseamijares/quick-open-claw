@@ -30,8 +30,8 @@ ClawdBot es una plataforma que permite desplegar asistentes de IA en Telegram co
 
 ```bash
 # Clonar repo
-git clone https://github.com/joseamijares/clawdbot-latam.git
-cd clawdbot-latam
+git clone https://github.com/joseamijares/quick-open-claw.git
+cd quick-open-claw
 
 # Instalar dependencias
 npm install
@@ -60,7 +60,7 @@ ClawdBot es open source bajo licencia AGPL-3.0. Puedes auto-hostear todo el stac
 ## Estructura
 
 ```
-clawdbot-latam/
+quick-open-claw/
 ├── src/
 │   ├── app/           # Next.js App Router
 │   │   ├── api/       # API routes
