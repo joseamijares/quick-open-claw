@@ -11,23 +11,23 @@ export const PLANS = {
     price_usd: 500, // $5 USD in cents
     features: ['Llama 3.2 (Ollama)', 'Sin costo de API', '1 asistente'],
     instances: 1,
-    use_ollama: true,
+    model_type: 'ollama',
+  },
+  lite: {
+    name: 'Lite',
+    price_mxn: 14900,
+    price_usd: 800,
+    features: ['Haiku / GPT-4o-mini (OpenRouter)', 'Sin API key', '1 asistente'],
+    instances: 1,
+    model_type: 'openrouter',
   },
   pro: {
     name: 'Pro',
     price_mxn: 19900,
     price_usd: 1000,
-    features: ['Claude Haiku / GPT-4o-mini', 'Tu API key', '2 asistentes'],
-    instances: 2,
-    use_ollama: false,
-  },
-  premium: {
-    name: 'Premium',
-    price_mxn: 39900,
-    price_usd: 2000,
-    features: ['Claude Sonnet / GPT-4o', 'Tu API key', '5 asistentes'],
-    instances: 5,
-    use_ollama: false,
+    features: ['Cualquier modelo', 'Tu API key', '3 asistentes'],
+    instances: 3,
+    model_type: 'byok', // bring your own key
   },
 } as const
 

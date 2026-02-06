@@ -1,4 +1,5 @@
-export type Plan = 'starter' | 'pro' | 'premium'
+export type Plan = 'starter' | 'lite' | 'pro'
+export type ModelType = 'ollama' | 'openrouter' | 'byok'
 export type InstanceStatus = 'provisioning' | 'running' | 'stopped' | 'error'
 export type HostStatus = 'available' | 'full' | 'provisioning' | 'error'
 
@@ -49,8 +50,9 @@ export interface Instance {
   status: InstanceStatus
   config: {
     model: string
-    use_ollama: boolean
+    model_type: ModelType // 'ollama' | 'openrouter' | 'byok'
     telegram_token?: string
+    api_key?: string // for byok
   }
   gateway_token: string
   port: number | null
