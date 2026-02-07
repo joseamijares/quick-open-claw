@@ -54,11 +54,12 @@ export default function Dashboard() {
     init()
   }, [router, supabase, fetchInstances])
 
-  // Poll every 30s
+  // Poll: 10s when any instance is provisioning, 30s otherwise
   useEffect(() => {
-    const interval = setInterval(fetchInstances, 30000)
+    const hasProvisioning = instances.some((i) => i.status === 'provisioning')
+    const interval = setInterval(fetchInstances, hasProvisioning ? 10000 : 30000)
     return () => clearInterval(interval)
-  }, [fetchInstances])
+  }, [fetchInstances, instances])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
