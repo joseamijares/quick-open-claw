@@ -10,14 +10,14 @@ const plans = [
     price: '$349',
     priceUSD: '$19 USD',
     period: '/mes',
-    description: 'Trae tu API key. Deploy en 60 seg.',
+    description: 'Trae tu propia API key. Despliega en 60 segundos.',
     features: [
-      'Tu API key (Claude/Kimi/GPT)',
-      'Deploy en 60 segundos',
-      '1 asistente',
-      'Telegram',
+      'Tu API key (Claude, GPT, Kimi)',
+      'Despliega en 60 segundos',
+      '1 asistente de IA',
+      'Canal de Telegram',
     ],
-    cta: 'EMPEZAR',
+    cta: 'EMPEZAR GRATIS',
     popular: false,
     color: 'gray' as const,
   },
@@ -26,14 +26,14 @@ const plans = [
     price: '$699',
     priceUSD: '$39 USD',
     period: '/mes',
-    description: 'Sin API keys. Solo funciona.',
+    description: 'Todo incluido. Sin API keys, sin complicaciones.',
     features: [
       'Claude Haiku incluido',
-      '$15 USD en créditos/mes',
-      '1 asistente',
-      'Sin configurar nada',
+      '$15 USD en créditos al mes',
+      '1 asistente listo para usar',
+      'Cero configuración técnica',
     ],
-    cta: 'COMENZAR',
+    cta: 'COMENZAR AHORA',
     popular: true,
     color: 'cyan' as const,
   },
@@ -42,12 +42,12 @@ const plans = [
     price: '$899',
     priceUSD: '$49 USD',
     period: '/mes',
-    description: 'Sin límites. Sin costos de API.',
+    description: 'Mensajes ilimitados. Cero costos de API.',
     features: [
-      'Ollama (Llama 3.2)',
-      'Mensajes ilimitados',
-      'Sin costos de API nunca',
-      '1 asistente',
+      'Ollama (Llama 3.2) incluido',
+      'Mensajes ilimitados por siempre',
+      'Sin costos de API adicionales',
+      'Servidor dedicado para ti',
     ],
     cta: 'IR UNLIMITED',
     popular: false,
@@ -59,37 +59,37 @@ const features = [
   {
     icon: Clock,
     title: '60 segundos',
-    description: 'De clic a asistente funcionando. Sin SSH, sin Docker, sin config.',
+    description: 'De clic a asistente funcionando. Sin SSH, sin Docker, sin configuración técnica.',
     badgeColor: 'bg-amber-100 text-amber-600',
   },
   {
     icon: Cpu,
-    title: 'Ollama incluido',
-    description: 'Usa Llama 3.2 sin pagar API. O trae tu propia key de Claude/GPT.',
+    title: 'Elige tu modelo',
+    description: 'Claude Opus 4, GPT-4o, Kimi K2.5, o Llama 3.2 local sin costos de API.',
     badgeColor: 'bg-blue-100 text-blue-600',
   },
   {
     icon: MessageCircle,
     title: 'Telegram nativo',
-    description: 'Conecta tu bot en minutos. WhatsApp próximamente.',
+    description: 'Conecta tu bot en minutos. WhatsApp y más canales próximamente.',
     badgeColor: 'bg-teal-100 text-teal-600',
   },
   {
     icon: Server,
-    title: 'Tu servidor',
-    description: 'Contenedor aislado en VPS dedicado. Tus datos, tu control.',
+    title: 'Tu propio servidor',
+    description: 'Servidor aislado y dedicado. Tus datos bajo tu control, siempre.',
     badgeColor: 'bg-orange-100 text-orange-500',
   },
   {
     icon: Globe,
-    title: 'Precios LATAM',
-    description: 'Desde $99 MXN/mes. Paga con tarjeta o transferencia.',
+    title: 'Hecho para LATAM',
+    description: 'Precios en pesos mexicanos. Paga con tarjeta, transferencia o SPEI.',
     badgeColor: 'bg-teal-100 text-teal-600',
   },
   {
     icon: Code,
-    title: 'Open Source',
-    description: 'Código abierto. Auto-hostea gratis o usa nuestro servicio.',
+    title: 'Código abierto',
+    description: 'Open source. Auto-hostea gratis o usa nuestro servicio administrado.',
     badgeColor: 'bg-red-100 text-red-500',
   },
 ]
@@ -134,8 +134,8 @@ export default function Home() {
             <span className="text-[#1E88E5] italic wavy-underline">en 60 segundos</span>
           </h1>
           <p className="text-lg text-[#6B7B8D] mb-10 max-w-xl mx-auto leading-relaxed">
-            Despliega un asistente inteligente en Telegram. Sin código, sin configuración, sin API keys (opcional).{' '}
-            <span className="font-bold text-[#FF6B35]">Solo funciona.</span>
+            Despliega un asistente de IA en Telegram sin código ni configuración técnica. Elige tu modelo, conecta tu bot y listo.{' '}
+            <span className="font-bold text-[#FF6B35]">Así de fácil.</span>
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link

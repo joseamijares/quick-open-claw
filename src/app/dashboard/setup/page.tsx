@@ -25,11 +25,10 @@ const STEPS = [
 ]
 
 const BYOK_MODELS = [
+  { value: 'claude-opus-4-6', label: 'Claude Opus 4', provider: 'anthropic' },
   { value: 'claude-sonnet-4-20250514', label: 'Claude Sonnet 4', provider: 'anthropic' },
-  { value: 'claude-3-5-haiku-20241022', label: 'Claude 3.5 Haiku', provider: 'anthropic' },
   { value: 'gpt-4o', label: 'GPT-4o', provider: 'openai' },
-  { value: 'gpt-4o-mini', label: 'GPT-4o Mini', provider: 'openai' },
-  { value: 'moonshot-v1-auto', label: 'Moonshot v1', provider: 'moonshot' },
+  { value: 'moonshot/kimi-k2.5', label: 'Kimi K2.5', provider: 'moonshot' },
 ]
 
 export default function SetupPage() {

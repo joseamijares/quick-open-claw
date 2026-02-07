@@ -49,31 +49,59 @@ export async function POST(request: Request) {
         .update({ status: 'running', started_at: new Date().toISOString() })
         .eq('id', job.id)
 
+      // Update instance status with step info
+      const updateInstanceStatus = async (status: string, statusMessage?: string) => {
+        await supabase
+          .from('instances')
+          .update({
+            status,
+            ...(statusMessage && { status_message: statusMessage }),
+          })
+          .eq('id', instance.id)
+      }
+
+      await updateInstanceStatus('provisioning', 'Preparando configuración del servidor...')
+
       // Determine if ollama is needed
       const useOllama = instance.config?.model_type === 'ollama'
+
+      // Validate required config
+      if (!instance.config?.telegram_token) {
+        throw new Error('Token de Telegram no configurado. Revisa la configuración de tu instancia.')
+      }
 
       // Create cloud-init script
       const userData = getCloudInitScript({
         gateway_token: instance.gateway_token,
         telegram_token: instance.config?.telegram_token,
         use_ollama: useOllama,
-        model: instance.config?.model || 'gpt-4o-mini',
+        model: instance.config?.model || 'gpt-4o',
       })
+
+      await updateInstanceStatus('provisioning', 'Creando servidor en la nube...')
 
       // Create server
       const serverType = useOllama ? 'cx32' : 'cx22'
-      const server = await hetzner.createServer({
-        name: `clawdbot-${instance.subdomain}`,
-        server_type: serverType,
-        location: 'nbg1',
-        image: 'ubuntu-24.04',
-        user_data: userData,
-      })
+      let server
+      try {
+        server = await hetzner.createServer({
+          name: `clawdbot-${instance.subdomain}`,
+          server_type: serverType,
+          location: 'nbg1',
+          image: 'ubuntu-24.04',
+          user_data: userData,
+        })
+      } catch (hetznerErr: unknown) {
+        const msg = hetznerErr instanceof Error ? hetznerErr.message : 'Error desconocido'
+        throw new Error(`Error al crear servidor en Hetzner: ${msg}`)
+      }
 
       const ip = server.public_net.ipv4.ip
 
+      await updateInstanceStatus('provisioning', 'Registrando servidor...')
+
       // Create host record
-      const { data: host } = await supabase
+      const { data: host, error: hostError } = await supabase
         .from('vps_hosts')
         .insert({
           provider: 'hetzner',
@@ -90,30 +118,41 @@ export async function POST(request: Request) {
         .select()
         .single()
 
+      if (hostError) {
+        throw new Error(`Error al registrar host: ${hostError.message}`)
+      }
+
       // Update instance
       await supabase
         .from('instances')
         .update({
           host_id: host?.id,
           status: 'provisioning',
+          status_message: 'Esperando que el servidor inicie...',
         })
         .eq('id', instance.id)
 
       // Poll for server ready (max 5 minutes)
+      const POLL_INTERVAL_MS = 10000
+      const MAX_POLLS = 30
       let ready = false
-      for (let i = 0; i < 30; i++) {
-        await new Promise((r) => setTimeout(r, 10000))
-        const current = await hetzner.getServer(server.id)
-        if (current.status === 'running') {
-          ready = true
-          break
+      for (let i = 0; i < MAX_POLLS; i++) {
+        await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS))
+        try {
+          const current = await hetzner.getServer(server.id)
+          if (current.status === 'running') {
+            ready = true
+            break
+          }
+        } catch {
+          // Transient poll failure, keep retrying
         }
       }
 
       if (ready) {
         await supabase
           .from('instances')
-          .update({ status: 'running' })
+          .update({ status: 'running', status_message: null })
           .eq('id', instance.id)
 
         await supabase
@@ -131,10 +170,10 @@ export async function POST(request: Request) {
 
         results.push({ job_id: job.id, status: 'completed', ip })
       } else {
-        throw new Error('Server did not become ready within timeout')
+        throw new Error('El servidor no respondió en 5 minutos. Intenta de nuevo o contacta soporte.')
       }
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Unknown error'
+      const message = err instanceof Error ? err.message : 'Error desconocido durante el aprovisionamiento'
 
       await supabase
         .from('provision_jobs')
@@ -147,7 +186,7 @@ export async function POST(request: Request) {
 
       await supabase
         .from('instances')
-        .update({ status: 'error' })
+        .update({ status: 'error', status_message: message })
         .eq('id', instance.id)
 
       results.push({ job_id: job.id, status: 'failed', error: message })
