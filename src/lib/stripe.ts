@@ -7,27 +7,53 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export const PLANS = {
   starter: {
     name: 'Starter',
-    price_mxn: 9900, // $99 MXN in centavos
-    price_usd: 500, // $5 USD in cents
-    features: ['Llama 3.2 (Ollama)', 'Sin costo de API', '1 asistente'],
+    price_mxn: 9900, // $99 MXN
+    price_usd: 500, // $5 USD
+    features: [
+      'Contenedor compartido',
+      'OpenRouter (Haiku/GPT-4o-mini)',
+      '1 asistente',
+      'Telegram',
+      'Docs y comunidad',
+    ],
     instances: 1,
-    model_type: 'ollama',
-  },
-  lite: {
-    name: 'Lite',
-    price_mxn: 14900,
-    price_usd: 800,
-    features: ['Haiku / GPT-4o-mini (OpenRouter)', 'Sin API key', '1 asistente'],
-    instances: 1,
+    channels: ['telegram'],
     model_type: 'openrouter',
+    hosting: 'shared',
   },
   pro: {
     name: 'Pro',
-    price_mxn: 19900,
-    price_usd: 1000,
-    features: ['Cualquier modelo', 'Tu API key', '3 asistentes'],
-    instances: 3,
-    model_type: 'byok', // bring your own key
+    price_mxn: 24900, // $249 MXN
+    price_usd: 1200, // $12 USD
+    features: [
+      'VPS dedicado',
+      'Tu API key (BYOK)',
+      '2 asistentes',
+      'Telegram + WhatsApp',
+      'Soporte por email',
+      'SLA 99%',
+    ],
+    instances: 2,
+    channels: ['telegram', 'whatsapp'],
+    model_type: 'byok',
+    hosting: 'dedicated',
+  },
+  business: {
+    name: 'Business',
+    price_mxn: 49900, // $499 MXN
+    price_usd: 2500, // $25 USD
+    features: [
+      'VPS dedicado + Ollama',
+      'BYOK + modelos locales',
+      '5 asistentes',
+      'Todos los canales',
+      'Soporte prioritario',
+      'SLA 99.9%',
+    ],
+    instances: 5,
+    channels: ['telegram', 'whatsapp', 'discord'],
+    model_type: 'byok_ollama',
+    hosting: 'dedicated_ollama',
   },
 } as const
 
