@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { Bot, Zap, Shield, MessageCircle, Cpu, CreditCard } from 'lucide-react'
+import Image from 'next/image'
+import { Zap, Shield, MessageCircle, Cpu, CreditCard, Bot } from 'lucide-react'
 
 const plans = [
   {
@@ -57,8 +58,8 @@ export default function Home() {
       {/* Header */}
       <header className="container mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Bot className="w-8 h-8 text-blue-400" />
-          <span className="text-xl font-bold">ClawdBot</span>
+          <Image src="/logo.svg" alt="QuickOpenClaw" width={40} height={40} />
+          <span className="text-xl font-bold">QuickOpenClaw</span>
         </div>
         <nav className="flex gap-4">
           <Link href="/auth/login" className="text-gray-300 hover:text-white">
@@ -104,7 +105,7 @@ export default function Home() {
       {/* Features */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold text-center mb-12">
-          ¿Por qué ClawdBot?
+          ¿Por qué QuickOpenClaw?
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-gray-800 p-6 rounded-xl">
@@ -204,7 +205,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-800 py-8">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>© 2026 ClawdBot LATAM. Hecho con ❤️ en México.</p>
+          <p>© 2026 QuickOpenClaw. Hecho con ❤️ en México.</p>
           <p className="mt-2 text-sm">
             Powered by{' '}
             <a
