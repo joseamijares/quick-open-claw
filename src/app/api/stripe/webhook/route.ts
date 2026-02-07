@@ -1,13 +1,15 @@
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-// Use service role for webhook (no user session)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Lazy init for service role client (no user session)
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function POST(request: Request) {
   const body = await request.text()
@@ -16,6 +18,7 @@ export async function POST(request: Request) {
   let event: Stripe.Event
 
   try {
+    const stripe = getStripe()
     event = stripe.webhooks.constructEvent(
       body,
       signature,
@@ -34,6 +37,7 @@ export async function POST(request: Request) {
 
       if (userId && plan) {
         // Create or update subscription
+        const supabase = getSupabaseAdmin()
         await supabase.from('subscriptions').upsert(
           {
             user_id: userId,
@@ -50,13 +54,15 @@ export async function POST(request: Request) {
 
     case 'customer.subscription.updated': {
       const subscription = event.data.object as Stripe.Subscription
+      const periodEnd = subscription.items.data[0]?.current_period_end
+      const supabase = getSupabaseAdmin()
       await supabase
         .from('subscriptions')
         .update({
           status: subscription.status,
-          current_period_end: new Date(
-            subscription.current_period_end * 1000
-          ).toISOString(),
+          ...(periodEnd && {
+            current_period_end: new Date(periodEnd * 1000).toISOString(),
+          }),
         })
         .eq('stripe_subscription_id', subscription.id)
       break
@@ -64,6 +70,7 @@ export async function POST(request: Request) {
 
     case 'customer.subscription.deleted': {
       const subscription = event.data.object as Stripe.Subscription
+      const supabase = getSupabaseAdmin()
       await supabase
         .from('subscriptions')
         .update({ status: 'cancelled' })

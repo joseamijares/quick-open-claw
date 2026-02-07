@@ -208,9 +208,11 @@ export default function Dashboard() {
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-400">Modelo</span>
                     <span className="text-white">
-                      {instance.config.use_ollama
-                        ? 'Llama 3.2 (Ollama)'
-                        : instance.config.model}
+                      {instance.config.model_type === 'openrouter'
+                        ? 'OpenRouter'
+                        : instance.config.model_type === 'byok_ollama'
+                          ? 'BYOK + Ollama'
+                          : 'BYOK'}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">

@@ -1,8 +1,13 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
-})
+let _stripe: Stripe | null = null
+
+export function getStripe() {
+  if (!_stripe) {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+  }
+  return _stripe
+}
 
 export const PLANS = {
   starter: {
@@ -65,6 +70,7 @@ export async function createCheckoutSession(
   plan: PlanKey,
   currency: 'mxn' | 'usd' = 'mxn'
 ) {
+  const stripe = getStripe()
   const planData = PLANS[plan]
   const amount = currency === 'mxn' ? planData.price_mxn : planData.price_usd
 
@@ -100,6 +106,7 @@ export async function createCheckoutSession(
 }
 
 export async function createPortalSession(customerId: string) {
+  const stripe = getStripe()
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
     return_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,

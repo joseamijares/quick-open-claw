@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { name, use_ollama = true, model = 'llama3.2', telegram_token } = body
+  const { name, model_type = 'openrouter', model = 'gpt-4o-mini', telegram_token } = body
 
   // Generate unique subdomain
   const subdomain = nanoid(8).toLowerCase()
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
       gateway_token,
       config: {
         model,
-        use_ollama,
+        model_type,
         telegram_token,
       },
     })
