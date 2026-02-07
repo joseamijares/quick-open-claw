@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json()
-  const { name, model_type = 'openrouter', model = 'gpt-4o-mini', telegram_token } = body
+  const { name, model_type = 'openrouter', model = 'gpt-4o-mini', telegram_token, api_key } = body
 
   // Generate unique subdomain
   const subdomain = nanoid(8).toLowerCase()
@@ -55,6 +55,7 @@ export async function POST(request: Request) {
         model,
         model_type,
         telegram_token,
+        ...(api_key && { api_key }),
       },
     })
     .select()
