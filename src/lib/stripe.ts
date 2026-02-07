@@ -7,8 +7,8 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export const PLANS = {
   starter: {
     name: 'Starter',
-    price_mxn: 9900, // $99 MXN
-    price_usd: 500, // $5 USD
+    price_mxn: 17900, // $179 MXN
+    price_usd: 1000, // $10 USD
     features: [
       'Contenedor compartido',
       'OpenRouter (Haiku/GPT-4o-mini)',
@@ -23,8 +23,8 @@ export const PLANS = {
   },
   pro: {
     name: 'Pro',
-    price_mxn: 24900, // $249 MXN
-    price_usd: 1200, // $12 USD
+    price_mxn: 39900, // $399 MXN
+    price_usd: 2200, // $22 USD
     features: [
       'VPS dedicado',
       'Tu API key (BYOK)',
@@ -40,8 +40,8 @@ export const PLANS = {
   },
   business: {
     name: 'Business',
-    price_mxn: 49900, // $499 MXN
-    price_usd: 2500, // $25 USD
+    price_mxn: 79900, // $799 MXN
+    price_usd: 4500, // $45 USD
     features: [
       'VPS dedicado + Ollama',
       'BYOK + modelos locales',

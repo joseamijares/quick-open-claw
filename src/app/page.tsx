@@ -6,8 +6,8 @@ import { Bot, Zap, Shield, MessageCircle, Cpu, CreditCard } from 'lucide-react'
 const plans = [
   {
     name: 'Starter',
-    price: '$99',
-    priceUSD: '$5 USD',
+    price: '$179',
+    priceUSD: '$10 USD',
     period: '/mes',
     description: 'Perfecto para empezar.',
     features: [
@@ -22,8 +22,8 @@ const plans = [
   },
   {
     name: 'Pro',
-    price: '$249',
-    priceUSD: '$12 USD',
+    price: '$399',
+    priceUSD: '$22 USD',
     period: '/mes',
     description: 'VPS dedicado. Tu API key.',
     features: [
@@ -38,8 +38,8 @@ const plans = [
   },
   {
     name: 'Business',
-    price: '$499',
-    priceUSD: '$25 USD',
+    price: '$799',
+    priceUSD: '$45 USD',
     period: '/mes',
     description: 'Todo incluido. Modelos locales.',
     features: [
