@@ -58,7 +58,7 @@ export default function Home() {
       {/* Header */}
       <header className="container mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="QuickOpenClaw" width={40} height={40} />
+          <Image src="/logo.jpg" alt="QuickOpenClaw" width={48} height={48} className="rounded-lg" />
           <span className="text-xl font-bold">QuickOpenClaw</span>
         </div>
         <nav className="flex gap-4">
