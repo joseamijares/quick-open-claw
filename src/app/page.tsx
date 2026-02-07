@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { Zap, Shield, MessageCircle, Cpu, CreditCard, Bot } from 'lucide-react'
 
 const plans = [
   {
     name: 'BYOK',
-    emoji: '🔑',
     price: '$349',
     priceUSD: '$19 USD',
     period: '/mes',
@@ -22,7 +22,6 @@ const plans = [
   },
   {
     name: 'Easy',
-    emoji: '✨',
     price: '$699',
     priceUSD: '$39 USD',
     period: '/mes',
@@ -33,12 +32,11 @@ const plans = [
       '1 asistente',
       'Sin configurar nada',
     ],
-    cta: '¡Comenzar! 🚀',
+    cta: 'Comenzar',
     popular: true,
   },
   {
     name: 'Unlimited',
-    emoji: '♾️',
     price: '$899',
     priceUSD: '$49 USD',
     period: '/mes',
@@ -56,20 +54,20 @@ const plans = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       {/* Header */}
-      <header className="container mx-auto px-6 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <Image src="/logo.jpg" alt="QuickOpenClaw" width={44} height={44} className="rounded-2xl" />
-          <span className="text-xl font-bold tracking-tight">QuickOpenClaw</span>
+      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <Image src="/logo.jpg" alt="QuickOpenClaw" width={48} height={48} className="rounded-lg" />
+          <span className="text-xl font-bold">QuickOpenClaw</span>
         </div>
-        <nav className="flex items-center gap-3">
-          <Link href="/auth/login" className="text-warm-gray hover:text-foreground font-medium px-4 py-2 rounded-xl transition-colors">
+        <nav className="flex gap-4">
+          <Link href="/auth/login" className="text-gray-300 hover:text-white">
             Iniciar sesión
           </Link>
           <Link
             href="/auth/signup"
-            className="bg-coral hover:bg-coral-dark text-white px-5 py-2.5 rounded-2xl font-semibold transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg"
           >
             Registrarse
           </Link>
@@ -77,27 +75,27 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="container mx-auto px-6 pt-16 pb-24 text-center">
-        <div className="text-6xl mb-6">🤖</div>
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+      <section className="container mx-auto px-4 py-20 text-center">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">
           Tu asistente de IA
           <br />
-          <span className="text-coral">en 60 segundos</span>
+          <span className="text-blue-400">en 60 segundos</span>
         </h1>
-        <p className="text-xl text-warm-gray mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
           Despliega un asistente inteligente en Telegram. Sin código, sin
-          configuración, sin API keys (opcional). Solo funciona. ⚡
+          configuración, sin API keys (opcional). Solo funciona.
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
+        <div className="flex gap-4 justify-center">
           <Link
             href="/auth/signup"
-            className="bg-coral hover:bg-coral-dark text-white px-8 py-4 rounded-2xl text-lg font-bold transition-all hover:scale-105 inline-flex items-center gap-2"
+            className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg text-lg font-semibold flex items-center gap-2"
           >
-            🚀 Desplegar ahora
+            <Zap className="w-5 h-5" />
+            Desplegar ahora
           </Link>
           <Link
             href="#pricing"
-            className="border-2 border-foreground/10 hover:border-foreground/20 px-8 py-4 rounded-2xl text-lg font-semibold transition-colors"
+            className="border border-gray-600 hover:border-gray-500 px-8 py-4 rounded-lg text-lg"
           >
             Ver precios
           </Link>
@@ -105,77 +103,96 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="container mx-auto px-6 py-20">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 tracking-tight">
+      <section className="container mx-auto px-4 py-20">
+        <h2 className="text-3xl font-bold text-center mb-12">
           ¿Por qué QuickOpenClaw?
         </h2>
-        <p className="text-warm-gray text-center mb-14 text-lg">Todo lo que necesitas, nada que no 🎯</p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { emoji: '⚡', title: '60 segundos', desc: 'De clic a asistente funcionando. Sin SSH, sin Docker, sin config.' },
-            { emoji: '🧠', title: 'Ollama incluido', desc: 'Usa Llama 3.2 sin pagar API. O trae tu propia key de Claude/GPT.' },
-            { emoji: '💬', title: 'Telegram nativo', desc: 'Conecta tu bot en minutos. WhatsApp próximamente.' },
-            { emoji: '🔒', title: 'Tu servidor', desc: 'Contenedor aislado en VPS dedicado. Tus datos, tu control.' },
-            { emoji: '🇲🇽', title: 'Precios LATAM', desc: 'Desde $99 MXN/mes. Paga con tarjeta o transferencia.' },
-            { emoji: '💚', title: 'Open Source', desc: 'Código abierto. Auto-hostea gratis o usa nuestro servicio.' },
-          ].map((f) => (
-            <div
-              key={f.title}
-              className="bg-white p-8 rounded-[20px] card-shadow card-transition"
-            >
-              <div className="text-4xl mb-4">{f.emoji}</div>
-              <h3 className="text-xl font-bold mb-2">{f.title}</h3>
-              <p className="text-warm-gray leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <Zap className="w-12 h-12 text-yellow-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">60 segundos</h3>
+            <p className="text-gray-400">
+              De clic a asistente funcionando. Sin SSH, sin Docker, sin config.
+            </p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <Cpu className="w-12 h-12 text-green-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Ollama incluido</h3>
+            <p className="text-gray-400">
+              Usa Llama 3.2 sin pagar API. O trae tu propia key de Claude/GPT.
+            </p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <MessageCircle className="w-12 h-12 text-blue-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Telegram nativo</h3>
+            <p className="text-gray-400">
+              Conecta tu bot en minutos. WhatsApp próximamente.
+            </p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <Shield className="w-12 h-12 text-purple-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Tu servidor</h3>
+            <p className="text-gray-400">
+              Contenedor aislado en VPS dedicado. Tus datos, tu control.
+            </p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <CreditCard className="w-12 h-12 text-pink-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Precios LATAM</h3>
+            <p className="text-gray-400">
+              Desde $99 MXN/mes. Paga con tarjeta o transferencia.
+            </p>
+          </div>
+          <div className="bg-gray-800 p-6 rounded-xl">
+            <Bot className="w-12 h-12 text-orange-400 mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Open Source</h3>
+            <p className="text-gray-400">
+              Código abierto. Auto-hostea gratis o usa nuestro servicio.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="container mx-auto px-6 py-20">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4 tracking-tight">
-          Precios simples 💰
-        </h2>
-        <p className="text-warm-gray text-center mb-14 text-lg">
+      <section id="pricing" className="container mx-auto px-4 py-20">
+        <h2 className="text-3xl font-bold text-center mb-4">Precios simples</h2>
+        <p className="text-gray-400 text-center mb-12">
           Sin sorpresas. Cancela cuando quieras.
         </p>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-[20px] p-8 relative card-transition ${
-                plan.popular
-                  ? 'bg-coral text-white scale-105 card-shadow-hover'
-                  : 'bg-white card-shadow'
+              className={`bg-gray-800 p-8 rounded-xl relative ${
+                plan.popular ? 'ring-2 ring-blue-500' : ''
               }`}
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow text-foreground text-sm font-bold px-4 py-1 rounded-full">
-                  ⭐ Popular
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-sm px-3 py-1 rounded-full">
+                  Popular
                 </span>
               )}
-              <div className="text-3xl mb-3">{plan.emoji}</div>
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
               <div className="mb-4">
-                <span className="text-4xl font-extrabold">{plan.price}</span>
-                <span className={plan.popular ? 'text-white/70' : 'text-warm-gray'}>{plan.period}</span>
-                <p className={`text-sm mt-1 ${plan.popular ? 'text-white/60' : 'text-warm-gray'}`}>{plan.priceUSD}</p>
+                <span className="text-4xl font-bold">{plan.price}</span>
+                <span className="text-gray-400">{plan.period}</span>
+                <p className="text-sm text-gray-500">{plan.priceUSD}</p>
               </div>
-              <p className={`mb-6 ${plan.popular ? 'text-white/80' : 'text-warm-gray'}`}>{plan.description}</p>
+              <p className="text-gray-400 mb-6">{plan.description}</p>
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
-                    <span className={plan.popular ? 'text-yellow' : 'text-green'}>✓</span>
+                    <span className="text-green-400">✓</span>
                     {feature}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/auth/signup"
-                className={`block text-center py-3.5 rounded-2xl font-bold transition-all hover:scale-105 ${
+                className={`block text-center py-3 rounded-lg font-semibold ${
                   plan.popular
-                    ? 'bg-white text-coral hover:bg-white/90'
-                    : 'bg-coral-light text-coral hover:bg-coral hover:text-white'
+                    ? 'bg-blue-600 hover:bg-blue-700'
+                    : 'bg-gray-700 hover:bg-gray-600'
                 }`}
               >
                 {plan.cta}
@@ -186,14 +203,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-foreground/5 py-10 mt-10">
-        <div className="container mx-auto px-6 text-center text-warm-gray">
-          <p className="text-lg">© 2026 QuickOpenClaw. Hecho con ❤️ en México 🇲🇽</p>
+      <footer className="border-t border-gray-800 py-8">
+        <div className="container mx-auto px-4 text-center text-gray-400">
+          <p>© 2026 QuickOpenClaw. Hecho con ❤️ en México.</p>
           <p className="mt-2 text-sm">
             Powered by{' '}
             <a
               href="https://openclaw.ai"
-              className="text-coral hover:underline font-medium"
+              className="text-blue-400 hover:underline"
             >
               OpenClaw
             </a>
