@@ -210,7 +210,9 @@ export default function Dashboard() {
                     <span className="text-white">
                       {instance.config.model_type === 'ollama'
                         ? 'Ollama (Llama 3.2)'
-                        : 'BYOK'}
+                        : instance.config.model_type === 'credits'
+                          ? 'Claude Haiku'
+                          : 'BYOK'}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">

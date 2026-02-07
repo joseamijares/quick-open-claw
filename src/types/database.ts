@@ -1,5 +1,5 @@
-export type Plan = 'byok' | 'unlimited'
-export type ModelType = 'byok' | 'ollama'
+export type Plan = 'byok' | 'easy' | 'unlimited'
+export type ModelType = 'byok' | 'credits' | 'ollama'
 export type HostingType = 'dedicated' | 'dedicated_ollama'
 export type InstanceStatus = 'provisioning' | 'running' | 'stopped' | 'error'
 export type HostStatus = 'available' | 'full' | 'provisioning' | 'error'

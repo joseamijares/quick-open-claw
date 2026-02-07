@@ -19,29 +19,46 @@ export const PLANS = {
       'Deploy en 60 segundos',
       '1 asistente',
       'Telegram',
-      'Docs + comunidad Discord',
     ],
     instances: 1,
     channels: ['telegram'],
     model_type: 'byok',
     hosting: 'dedicated',
+    credits: 0,
   },
-  unlimited: {
-    name: 'Unlimited',
+  easy: {
+    name: 'Easy',
     price_mxn: 69900, // $699 MXN
     price_usd: 3900, // $39 USD
     features: [
-      'Ollama (Llama 3.2)',
-      'Sin costos de API',
-      'Mensajes ilimitados',
-      '2 asistentes',
+      'Claude Haiku incluido',
+      '$15 USD en créditos/mes',
+      '1 asistente',
       'Telegram',
-      'Soporte por email',
+      'Sin configurar API keys',
     ],
-    instances: 2,
+    instances: 1,
+    channels: ['telegram'],
+    model_type: 'credits',
+    hosting: 'dedicated',
+    credits: 1500, // $15 USD in cents
+  },
+  unlimited: {
+    name: 'Unlimited',
+    price_mxn: 89900, // $899 MXN
+    price_usd: 4900, // $49 USD
+    features: [
+      'Ollama (Llama 3.2)',
+      'Sin costos de API nunca',
+      'Mensajes ilimitados',
+      '1 asistente',
+      'Telegram',
+    ],
+    instances: 1,
     channels: ['telegram'],
     model_type: 'ollama',
     hosting: 'dedicated_ollama',
+    credits: 0,
   },
 } as const
 
