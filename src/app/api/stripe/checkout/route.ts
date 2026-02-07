@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     currency?: 'mxn' | 'usd'
   }
 
-  if (!['starter', 'pro', 'business'].includes(plan)) {
+  if (!['byok', 'unlimited'].includes(plan)) {
     return NextResponse.json({ error: 'Invalid plan' }, { status: 400 })
   }
 

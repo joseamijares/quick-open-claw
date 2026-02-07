@@ -10,54 +10,37 @@ export function getStripe() {
 }
 
 export const PLANS = {
-  starter: {
-    name: 'Starter',
-    price_mxn: 17900, // $179 MXN
-    price_usd: 1000, // $10 USD
+  byok: {
+    name: 'BYOK',
+    price_mxn: 34900, // $349 MXN
+    price_usd: 1900, // $19 USD
     features: [
-      'Contenedor compartido',
-      'OpenRouter (Haiku/GPT-4o-mini)',
+      'Tu API key (Claude/Kimi/GPT)',
+      'Deploy en 60 segundos',
       '1 asistente',
       'Telegram',
-      'Docs y comunidad',
+      'Docs + comunidad Discord',
     ],
     instances: 1,
     channels: ['telegram'],
-    model_type: 'openrouter',
-    hosting: 'shared',
-  },
-  pro: {
-    name: 'Pro',
-    price_mxn: 39900, // $399 MXN
-    price_usd: 2200, // $22 USD
-    features: [
-      'VPS dedicado',
-      'Tu API key (BYOK)',
-      '2 asistentes',
-      'Telegram + WhatsApp',
-      'Soporte por email',
-      'SLA 99%',
-    ],
-    instances: 2,
-    channels: ['telegram', 'whatsapp'],
     model_type: 'byok',
     hosting: 'dedicated',
   },
-  business: {
-    name: 'Business',
-    price_mxn: 79900, // $799 MXN
-    price_usd: 4500, // $45 USD
+  unlimited: {
+    name: 'Unlimited',
+    price_mxn: 69900, // $699 MXN
+    price_usd: 3900, // $39 USD
     features: [
-      'VPS dedicado + Ollama',
-      'BYOK + modelos locales',
-      '5 asistentes',
-      'Todos los canales',
-      'Soporte prioritario',
-      'SLA 99.9%',
+      'Ollama (Llama 3.2)',
+      'Sin costos de API',
+      'Mensajes ilimitados',
+      '2 asistentes',
+      'Telegram',
+      'Soporte por email',
     ],
-    instances: 5,
-    channels: ['telegram', 'whatsapp', 'discord'],
-    model_type: 'byok_ollama',
+    instances: 2,
+    channels: ['telegram'],
+    model_type: 'ollama',
     hosting: 'dedicated_ollama',
   },
 } as const

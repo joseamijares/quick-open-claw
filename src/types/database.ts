@@ -1,6 +1,6 @@
-export type Plan = 'starter' | 'pro' | 'business'
-export type ModelType = 'openrouter' | 'byok' | 'byok_ollama'
-export type HostingType = 'shared' | 'dedicated' | 'dedicated_ollama'
+export type Plan = 'byok' | 'unlimited'
+export type ModelType = 'byok' | 'ollama'
+export type HostingType = 'dedicated' | 'dedicated_ollama'
 export type InstanceStatus = 'provisioning' | 'running' | 'stopped' | 'error'
 export type HostStatus = 'available' | 'full' | 'provisioning' | 'error'
 
